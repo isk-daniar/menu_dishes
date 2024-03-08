@@ -33,20 +33,20 @@ def upgrade() -> None:
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column("dishes_count", sa.Integer(), nullable=False),
-    sa.Column('submenu', sa.UUID(as_uuid=True), nullable=True),
-    sa.ForeignKeyConstraint(['submenu'], ['menu.menu_uuid'], ondelete='CASCADE'),
+    sa.Column('menu_id', sa.UUID(as_uuid=True), nullable=True),
+    sa.ForeignKeyConstraint(['menu_id'], ['menu.menu_uuid'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('submenu_uuid'),
-    sa.UniqueConstraint('submenu')
+    sa.UniqueConstraint('menu_id')
     )
     op.create_table('dish',
     sa.Column('dish_uuid', sa.UUID(as_uuid=True), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
-    sa.Column('submenu', sa.UUID(as_uuid=True), nullable=True),
-    sa.ForeignKeyConstraint(['submenu'], ['submenu.submenu_uuid'], ondelete='CASCADE'),
+    sa.Column('submenu_id', sa.UUID(as_uuid=True), nullable=True),
+    sa.ForeignKeyConstraint(['submenu_id'], ['submenu.submenu_uuid'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('dish_uuid'),
-    sa.UniqueConstraint('submenu')
+    sa.UniqueConstraint('submenu_id')
     )
     # ### end Alembic commands ###
 
